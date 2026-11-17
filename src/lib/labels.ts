@@ -48,6 +48,7 @@ export const LABEL_PRESETS: readonly LabelPreset[] = [
       dismiss: 'Ausblenden',
       linkOpen: 'Öffnen',
       notShownTitle: 'Einige Inhalte werden nicht angezeigt',
+      filterButton: 'Filter (in dieser Ansicht nicht verfügbar)',
     },
   },
   {
@@ -77,6 +78,7 @@ export const LABEL_PRESETS: readonly LabelPreset[] = [
       dismiss: 'Ignorer',
       linkOpen: 'Ouvrir',
       notShownTitle: 'Certains contenus ne sont pas affichés',
+      filterButton: 'Filtre (non disponible dans cette visionneuse)',
     },
   },
 ];

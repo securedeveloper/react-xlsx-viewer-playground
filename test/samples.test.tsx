@@ -27,6 +27,14 @@ describe('samples', () => {
     expect(screen.getAllByRole('gridcell').some((c) => c.textContent === 'What')).toBe(true);
   });
 
+  it('19-builders shows read-only autofilter buttons named by labels.filterButton', async () => {
+    const onLoad = vi.fn();
+    render(<XlsxViewer source={sampleBytes('19-builders')} onLoad={onLoad} labels={{ filterButton: 'Filter here' }} style={{ height: 400 }} />);
+    await waitFor(() => expect(onLoad).toHaveBeenCalledTimes(1));
+    expect(document.querySelectorAll('.xv-filter').length).toBeGreaterThan(0);
+    expect(document.body.innerHTML).toContain('Filter here');
+  });
+
   it('the generated large workbook opens', async () => {
     const onLoad = vi.fn();
     render(<XlsxViewer source={bigWorkbook(1000, 10)} onLoad={onLoad} style={{ height: 400 }} />);

@@ -53,6 +53,11 @@ describe('generateCode', () => {
     expect(tsx).toContain("sheets: 'Blätter',");
   });
 
+  it('includes labels.filterButton', () => {
+    const { tsx } = generateCode(settings({ chrome: 'system' }), { filterButton: 'Filtre (non disponible)' });
+    expect(tsx).toContain("filterButton: 'Filtre (non disponible)',");
+  });
+
   it('adds the worker prop and the worker file', () => {
     const { tsx, worker } = generateCode(settings({ chrome: 'system', worker: true }), {});
     expect(tsx).toContain("worker={() => new Worker(new URL('./excel.worker.ts', import.meta.url), { type: 'module' })}");
