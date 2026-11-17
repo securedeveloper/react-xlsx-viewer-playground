@@ -41,6 +41,12 @@ export const EXAMPLES: readonly Example[] = [
     settings: { source: '99-kitchen-sink', labels: 'de', locale: 'de-DE' },
   },
   {
+    id: 'autofilter',
+    title: 'Autofilter buttons',
+    description: "The Dataset sheet's header filter, shown read-only; labels.filterButton names the buttons.",
+    settings: { source: '19-builders', sheet: 0 },
+  },
+  {
     id: 'minimal',
     title: 'Minimal chrome',
     description: 'No formula bar, status bar or headers: a plain embedded table.',

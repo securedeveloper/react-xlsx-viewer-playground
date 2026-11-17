@@ -12,6 +12,12 @@ describe('labels', () => {
     }
   });
 
+  it('filterButton is a string label, translated in every preset', () => {
+    expect(STRING_LABEL_KEYS).toContain('filterButton');
+    for (const preset of LABEL_PRESETS.filter((p) => p.id !== 'en')) expect(preset.labels.filterButton).toBeTruthy();
+    expect(parseCustomLabels('{"filterButton":"Filter"}')).toEqual({ labels: { filterButton: 'Filter' }, error: null });
+  });
+
   it('parses custom JSON and reports what it ignores', () => {
     expect(parseCustomLabels('{"viewer":"V","sheet":"x","nope":1}')).toEqual({ labels: { viewer: 'V' }, error: 'Ignored (not a string label): sheet, nope' });
     expect(parseCustomLabels('[1]').error).toBe('Expected a JSON object.');

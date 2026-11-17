@@ -118,7 +118,7 @@ export function Controls({ settings: s, fileZoom, labelError, onChange, onResetZ
                 const id = e.target.value;
                 if (id === 'custom') {
                   const from = LABEL_PRESETS.find((p) => p.id === s.labels)?.labels ?? {};
-                  onChange({ labels: 'custom', customLabels: JSON.stringify(Object.keys(from).length ? from : { viewer: 'My viewer', sheets: 'Tabs' }, null, 2) });
+                  onChange({ labels: 'custom', customLabels: JSON.stringify(Object.keys(from).length ? from : { viewer: 'My viewer', sheets: 'Tabs', filterButton: 'Filter (read-only)' }, null, 2) });
                 } else onChange({ labels: id });
               }}
             >
