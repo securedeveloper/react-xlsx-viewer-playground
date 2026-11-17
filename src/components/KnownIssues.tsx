@@ -14,11 +14,6 @@ export function KnownIssues() {
           Autofilter buttons aren't shown (<a className="underline" href={`${ISSUES}/19`}>#19</a>).
         </li>
         <li>
-          Fixed on main, coming in the next alpha: auto-fit row heights (<a className="underline" href={`${ISSUES}/14`}>#14</a>), shrink to
-          fit (<a className="underline" href={`${ISSUES}/15`}>#15</a>) and the grid ending before the viewport on small sheets{' '}
-          (<a className="underline" href={`${ISSUES}/17`}>#17</a>).
-        </li>
-        <li>
           Read-only by design: formulas show the results stored in the file and are not recalculated. Charts, images, comments and
           conditional formatting are listed in the viewer's "not shown" notice.
         </li>
