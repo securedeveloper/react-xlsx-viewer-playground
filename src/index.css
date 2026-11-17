@@ -1,0 +1,37 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-50: #f0f0fb;
+  --color-brand-100: #e0e0f6;
+  --color-brand-500: #5a5ac4;
+  --color-brand-600: #4f4fb3;
+  --color-brand-700: #3f3f96;
+  --color-brand-300: #a8a8ff;
+}
+
+@layer base {
+  html {
+    color-scheme: light;
+  }
+  html.dark {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased dark:bg-slate-950 dark:text-slate-100;
+  }
+
+  /*
+   * Keep Tailwind's preflight out of the viewer. react-xlsx-viewer's stylesheet is
+   * written against browser defaults; revert-layer rolls every property set by this
+   * base layer (preflight included) back to them inside the viewer. The viewer's own
+   * unlayered styles and its inline cell styles still win over any layer.
+   */
+  .xv-viewer,
+  .xv-viewer *,
+  .xv-viewer *::before,
+  .xv-viewer *::after {
+    all: revert-layer;
+  }
+}
