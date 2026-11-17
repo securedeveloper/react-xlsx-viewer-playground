@@ -1,0 +1,89 @@
+# Dependabot version updates.
+#
+# Security updates are switched on in the repository settings and run as
+# soon as an advisory appears, independent of the schedules here. The
+# ignore rules and the commit prefix of the first npm entry apply to them
+# too. Version updates run on the schedules below, grouped so that each run
+# opens only a few PRs.
+version: 2
+updates:
+  - package-ecosystem: npm
+    # Single package (no workspaces).
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 3
+    # Keep exact pins exact.
+    versioning-strategy: increase
+    commit-message:
+      prefix: deps
+    groups:
+      # All dev-dependency minor and patch updates in one PR.
+      dev-dependencies:
+        dependency-type: development
+        update-types: [minor, patch]
+      # All runtime-dependency minor and patch updates in one PR.
+      production-dependencies:
+        dependency-type: production
+        update-types: [minor, patch]
+      # Major updates separately, together in one PR, so they can be
+      # reviewed (or closed) as a set.
+      major-updates:
+        update-types: [major]
+    ignore:
+      # The library pin is bumped by the weekly entry below, not here.
+      - dependency-name: "react-xlsx-viewer"
+      - dependency-name: "javascript-excel"
+      # TypeScript is held at 6.0.x on purpose: typescript-eslint 8 declares
+      # a peer range of typescript <6.1.0. Raise it by hand when
+      # typescript-eslint widens that range. Patch releases still come through.
+      - dependency-name: typescript
+        update-types: [version-update:semver-major, version-update:semver-minor]
+
+  # Weekly: only the published library (exact pin). After a release this
+  # opens a PR that bumps the pin and the lockfile; the demo is then updated
+  # in that PR.
+  #
+  # Dependabot allows one entry per ecosystem, directory and target branch.
+  # Naming the default branch explicitly makes this a second npm entry for
+  # "/" (workaround from dependabot/dependabot-core#1778). Because it sets
+  # target-branch, its options do not apply to security updates; those keep
+  # using the monthly entry above.
+  #
+  # Prereleases: the pin is a prerelease (for example 2.0.0-alpha.5), and
+  # Dependabot only offers prereleases with the same major.minor.patch
+  # (2.0.0-alpha.6, 2.0.0-beta.1, 2.0.0-rc.1) plus the final 2.0.0. The first
+  # prerelease of a new line (for example 2.1.0-alpha.0) is not offered and
+  # needs a manual bump.
+  - package-ecosystem: npm
+    directory: /
+    target-branch: main
+    schedule:
+      interval: weekly
+      day: monday
+    open-pull-requests-limit: 2
+    versioning-strategy: increase
+    allow:
+      - dependency-name: "react-xlsx-viewer"
+      - dependency-name: "javascript-excel"
+    commit-message:
+      prefix: deps
+    groups:
+      # The library and the javascript-excel version it needs move together,
+      # so a release of either lands as one PR.
+      library:
+        patterns:
+          - "react-xlsx-viewer"
+          - "javascript-excel"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    open-pull-requests-limit: 2
+    commit-message:
+      prefix: deps
+    groups:
+      # Every workflow action update (any semver level) in one PR.
+      github-actions:
+        patterns: ["*"]
