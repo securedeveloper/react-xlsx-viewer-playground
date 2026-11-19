@@ -12,14 +12,12 @@ export function KnownIssues() {
           don't filter. Charts, images, comments and conditional formatting are listed in the viewer's "not shown" notice.
         </li>
         <li>
-          The first beta: feature-complete for 1.0, fixes only from here. The manual screen-reader passes (NVDA, VoiceOver, TalkBack,
-          JAWS) are still open.
+          The manual screen-reader passes (NVDA, VoiceOver, TalkBack, JAWS) were not done for 1.0.0 and are still open. axe and an
+          automated check of the browser's accessibility tree run in the library's CI.
         </li>
         <li>
-          Changed in this version, for screen readers: grid cells are announced as read-only; an internal link is described with its sheet
-          ("Link to Second sheet, A1", and "Go to Second sheet, A1" in the link chip); a link that won't open, such as a{' '}
-          <code>javascript:</code> address, is described as "Link not opened: unsupported address". The corner header's name and the
-          dark theme's loading and error screens were fixed too. No API changes.
+          Changed in this version: the first stable release. It requires javascript-excel <code>^2.0.0</code>, the engine's stable
+          release. No API changes since 1.0.0-beta.0.
         </li>
       </ul>
       <p className="mt-2">
